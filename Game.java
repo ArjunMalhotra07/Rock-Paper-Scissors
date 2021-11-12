@@ -13,6 +13,7 @@ class Game extends JFrame{
 
     ImageIcon image_rock, image_scissor, image_paper;
     public void setup(){
+    
        image_rock= new ImageIcon(new ImageIcon("rock.png").getImage().getScaledInstance(80, 80, Image.SCALE_DEFAULT));
 
        image_scissor= new ImageIcon(new ImageIcon("scissor.png").getImage().getScaledInstance(80, 80, Image.SCALE_DEFAULT));
