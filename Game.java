@@ -11,6 +11,8 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent; 
 import java.awt.event.MouseAdapter;
 
+
+// this is our stone paper scissors game
 class Game extends JFrame{
 
     JLabel result, computerChoice, compScore, playerScore;
