@@ -15,7 +15,7 @@ import java.awt.event.MouseAdapter;
 // this is our stone paper scissors game
 class Game extends JFrame{
 
-    JLabel result, computerChoice, compScore, playerScore;
+    JLabel result, computerChoice, compScore, playerScore, x;
     int comp_Score=0; int player_Score=0;
 
 
@@ -34,42 +34,45 @@ class Game extends JFrame{
        label_rock.setIcon(image_rock);
        label_rock.setHorizontalTextPosition(JLabel.CENTER);
        label_rock.setVerticalTextPosition(JLabel.BOTTOM);
-       label_rock.setBounds(150, 500,100,100);
+       label_rock.setBounds(150,300,100,100);
 
        JLabel label_scissor = new JLabel();
        label_scissor.setText("Scissor");
        label_scissor.setIcon(image_scissor);
        label_scissor.setHorizontalTextPosition(JLabel.CENTER);
        label_scissor.setVerticalTextPosition(JLabel.BOTTOM);
-       label_scissor.setBounds(250,500,100,100);
+       label_scissor.setBounds(250,300,100,100);
 
        JLabel label_paper = new JLabel();
        label_paper.setText("Paper");
        label_paper.setIcon(image_paper);
        label_paper.setHorizontalTextPosition(JLabel.CENTER);
        label_paper.setVerticalTextPosition(JLabel.BOTTOM);
-       label_paper.setBounds(350,500,100,100);
+       label_paper.setBounds(350,300,100,100);
         
        computerChoice = new JLabel();
        computerChoice.setHorizontalTextPosition(JLabel.CENTER);
        computerChoice.setVerticalTextPosition(JLabel.BOTTOM);
-       computerChoice.setBounds(250,100,100,100);
+       computerChoice.setBounds(250,90,100,100);
 
        result= new JLabel();
        result.setFont(new Font("Serif",Font.ITALIC,20));
-       result.setBounds(250,100,100,100);
-
+       result.setBounds(250,450,100,100);
 
        JLabel score= new JLabel("SCORE");
-       score.setBounds(400,0,100,100);
+       score.setBounds(500,0,100,100);
 
-       compScore= new JLabel("Computer Points:0");
-       //compScore.setText( "Computer Points : 0 ");
-       compScore.setBounds(400,100,100,100);
+       compScore= new JLabel();
+       compScore.setText( "Computer:0");
+       compScore.setBounds(500,15,100,100);
 
        playerScore=new JLabel();
-       playerScore.setText("Player Points : 0 ");
-       playerScore.setBounds(400,200,100,100);
+       playerScore.setText("Player:0");
+       playerScore.setBounds(500,30,100,100);
+
+       x=new JLabel();
+       x.setText("Let's see ur Stone, Paper, Scissor Skills");
+       x.setBounds(150,50,400,400);
         
        
 
@@ -99,12 +102,15 @@ class Game extends JFrame{
        add(score);
        add(compScore);
        add(playerScore);
+       add(x);
        setLayout(null);
     }
 
 public void calculate(String player){
      String[] list={"Rock","Paper","Scissor"};
      int rndm= (int)((Math.random()*10)%3);
+     String comp=list[rndm];
+     computerChoice.setText(comp); 
 
      if(rndm==0){
          computerChoice.setIcon(image_rock); 
@@ -116,6 +122,46 @@ public void calculate(String player){
      computerChoice.setIcon(image_scissor); 
     }
 
+    String res="";
+    if(player.equals(comp)){
+        res="DRAW";
+    }
+    else if(player.equals("Rock")){
+        if(comp.equals("Paper")){
+            res="You Lose!";
+            comp_Score++;
+        }
+        else{
+            res="You Win";
+            player_Score++;
+        }
+
+    }
+    else if(player.equals("Paper")){
+        if(comp.equals("Scissor")){
+            res="You Lose!";
+            comp_Score++;
+        }
+        else{
+            res="You Win";
+            player_Score++;
+        }
+
+    }
+    else if (player.equals("Scissor")){
+        if(comp.equals("Rock")){
+            res="You Lose!";
+            comp_Score++;
+        }
+        else{
+            res="You Win";
+            player_Score++;
+        }
+
+    }
+    result.setText(res);
+    playerScore.setText("Player:"+player_Score);
+    compScore.setText(("Computer:"+comp_Score));
 }
 public static void main(String[] args){
     Game g =new Game();
